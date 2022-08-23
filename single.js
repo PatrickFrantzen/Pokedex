@@ -1,4 +1,4 @@
-let currentPokemon;
+/*let currentPokemon;
 
 async function test() {
     let url= 'https://pokeapi.co/api/v2/pokemon/charmander'
@@ -33,4 +33,4 @@ function loadStats(stats) {
     return `
     <div>${stats.stat.name}</div> <div>${stats.base_stat}</div>
     `
-}
+}*/

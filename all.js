@@ -2,10 +2,8 @@ let firstPokemon; //Variable für die ersten 20 Pokemon, die per API geladen wer
 let url = 'https://pokeapi.co/api/v2/pokemon';
 
 async function loadFirstPokemon() {
-    
     response = await fetch(url);
     let firstPokemon = await response.json();
-    console.log(firstPokemon);
     loadSinglePokemon(firstPokemon);
 }
 
@@ -15,10 +13,10 @@ async function loadSinglePokemon(firstPokemon) {
     for (let i = 0; i < singlePokemon.length; i++) {
         let responsePokemon = await fetch(singlePokemon[i].url);
         let Pokemon = await responsePokemon.json();
-        loadSinglePokemonInfos(Pokemon)
         console.log(Pokemon);
+        loadSinglePokemonInfos(Pokemon);
     }
-    /*renderPokemon(Pokemon);*/
+ 
 }
 
 function loadSinglePokemonInfos(Pokemon) {
@@ -27,15 +25,26 @@ function loadSinglePokemonInfos(Pokemon) {
     let height = Pokemon.height;
     let weight = Pokemon.weight;
     let picture = Pokemon.sprites['front_default'];
-    let stats = getStatsOf(Pokemon);
+    getStatsOf(Pokemon);
     let types = getTypesOf(Pokemon);
+    renderPokedex(name, number, height, weight, picture, types);
+    
+    
 }
 
 function getStatsOf(Pokemon) {
     for (let i = 0; i < Pokemon['stats'].length; i++) {
         let stat_name = Pokemon.stats[i].stat.name;
         let stat_value = Pokemon.stats[i].base_stat;
+        document.getElementById('stats').innerHTML += Stats(stat_name, stat_value); // Stats werden auf der Startseit nicht benötigt, erst im Pop-Up
     }
+}
+
+function Stats(stat_name, stat_value) {
+    return `
+    <div>${stat_name}</div>
+    <div>${stat_value}</div>
+    `
 }
 
 function getTypesOf(Pokemon) {
@@ -44,17 +53,22 @@ function getTypesOf(Pokemon) {
     }
 }
 
-
-/*function renderPokemon(Pokemon) {
-    document.getElementById('Pokedex').innerHTML += createPokedexItem();
+function renderPokedex(name, number, height, weight, picture, types) {
+    document.getElementById('pokedex').innerHTML += renderPokedexItem(name, number, height, weight, picture, types);
+    
 }
 
-function createPokedexItem() {
-    return`
-    <h1 id="pokemon-name"></h1>
-    <img id="pokemon-pic" src="">
-    <div id="pokemon-stats"></div>
+function renderPokedexItem(name, number, height, weight, picture, stats, types) {
+    return `
+    <div>${name}</div>
+    <div># ${number}</div>
+    <div>${height} m</div>
+    <div>${weight}</div>
+    <div>${picture}</div>
+    
+    <div>${types}</div>
     `
-}*/
+    
+}
 
-//Nächster Punkt per Pokemon_url auf die Details des einzelnen Pokemon zugreifen
+// Daten werden korrekt gezogen. Umsetzung der Startseite mit Bild und Infos kann umgesetzt werden
