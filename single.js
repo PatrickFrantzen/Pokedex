@@ -1,6 +1,6 @@
-/*let currentPokemon;
+let currentPokemon;
 
-async function loadPokemon() {
+async function test() {
     let url= 'https://pokeapi.co/api/v2/pokemon/charmander'
     response = await fetch(url);
     let currentPokemon = await response.json();
@@ -33,4 +33,4 @@ function loadStats(stats) {
     return `
     <div>${stats.stat.name}</div> <div>${stats.base_stat}</div>
     `
-}*/
+}
