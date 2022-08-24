@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +11,33 @@
     <script src="all.js"></script>
     <title>Pokedex</title>
 </head>
+
 <body onload="loadFirstPokemon()">
-    <div id="pokedex">
-        <div id="stats"></div>
+    <div class="gameboy">
+        <div class="gb-display">
+            <div class="power-area">
+                <div class="power"></div>
+                <span>Power</span>
+            </div>
+            <div class="content">
+                <nav class="navbar bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand">Pokedex</a>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </nav>
+                <ul id="pokedex" class="list-group list-group-flush pokedex">
+
+                </ul>
+
+            </div>
+            
+        </div>
+        <span class="gameboy-text">Game Girl Classic</span>
     </div>
 </body>
+
 </html>

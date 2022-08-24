@@ -1,5 +1,132 @@
-#pokedex {
-    min-height: 50vh;
-    background-color: rgb(219, 34, 34);
+body {
+    margin: 0;
+}
+
+.gameboy {
+    height: 100vh;
+    background-color: lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.gameboy-text {
+    margin-top: 16px;
+    font-size: 32px;
+}
+
+.gb-display {
+    height: 90vh;
+    width: 95vw;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: grey;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 70px;
+}
+.power-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     color: white;
 }
+
+.power {
+    width: 25px;
+    height: 25px;
+    border-radius: 50px;
+    animation: spinBall 0.13s linear infinite;
+            box-shadow: inset 0 0 18px #fff, 
+                inset 6px 0 18px rgb(250, 44, 44), 
+                inset -6px 0 18px rgb(255, 0, 21), 
+                inset 6px 0 30px rgb(245, 52, 52), 
+                inset -6px 0 30px rgb(255, 0, 34), 
+                0 0 18px #fff, -4px 
+                0 18px rgb(245, 55, 86), 4px 0 18px rgb(255, 0, 0);
+}
+
+@keyframes spinBall {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.content {
+    height: 70vh;
+    width: 75vw;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.pokedex {
+    overflow: auto;
+    
+}
+
+.pokedex li {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.pokedex li img {
+    height: 100px;
+}
+
+.type {
+    border: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color);
+    border-radius: 10px;
+    height: 50px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.grass {
+    background-color: rgb(26, 148, 26);
+    color: white;
+}
+
+.fire {
+    background-color: rgb(221, 9, 9);
+    color: white;
+}
+
+.water {
+    background-color: rgb(25, 126, 221);
+    color: white;
+}
+
+.bug {
+    background-color: rgb(127, 223, 98);
+    color: white;
+}
+
+.normal {
+    background-color: rgb(218, 223, 217);
+    color: white;
+}
+
+.poison {
+    background-color: rgb(43, 253, 1);
+    color: black;
+}
+
+.flying {
+    background-color: rgb(250, 178, 70);
+    color: black;
+}
+
+.b-none {
+    border: unset;
+    pointer-events: none;
+}
+
