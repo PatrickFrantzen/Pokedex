@@ -130,3 +130,29 @@ body {
     pointer-events: none;
 }
 
+.list-group-item:hover {
+    background-color: lightgrey;
+}
+
+.dialog-bg {
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog {
+    width: 50vw;
+    height: 75vh;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 24px;
+}
+

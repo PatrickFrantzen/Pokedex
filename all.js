@@ -23,48 +23,30 @@ function loadSinglePokemonInfos(i, Pokemon) {
     let height = Pokemon.height;
     let weight = Pokemon.weight;
     let picture = Pokemon.sprites['front_default'];
-    getStatsOf(Pokemon);
     let type1 = getTypeOneOf(Pokemon);
     let type2 =getTypeTwoOf(Pokemon);
-    renderPokedex(i, name, number, picture, type1, type2);
-
-
-}
-
-function getStatsOf(Pokemon) {
-    for (let i = 0; i < Pokemon['stats'].length; i++) {
-        let stat_name = Pokemon.stats[i].stat.name;
-        let stat_value = Pokemon.stats[i].base_stat;
-        /*document.getElementById('stats').innerHTML += Stats(stat_name, stat_value);*/// Stats werden auf der Startseit nicht benötigt, erst im Pop-Up
-    }
-}
-
-function Stats(stat_name, stat_value) {
-    return `
-    <div>${stat_name}</div>
-    <div>${stat_value}</div>
-    `
+    renderPokedex(i, name, number, height, weight, picture, type1, type2);
 }
 
 function getTypeOneOf(Pokemon) {
         return Pokemon.types[0].type.name[0].toUpperCase() + Pokemon.types[0].type.name.slice(1);
 }
 function getTypeTwoOf(Pokemon) {
-    if (Pokemon.types.length == 2) { //mit Länge des Arrays arabeiten?
+    if (Pokemon.types.length == 2) {
         return Pokemon.types[1].type.name[0].toUpperCase() + Pokemon.types[1].type.name.slice(1);
     } else {
      return '';   
     }
 }
 
-function renderPokedex(i, name, number, picture, type1, type2) {
-    document.getElementById('pokedex').innerHTML += renderPokedexItem(i, name, number, picture, type1, type2);
+function renderPokedex(i, name, number, height, weight, picture, type1, type2) {
+    document.getElementById('pokedex').innerHTML += renderPokedexItem(i, name, number, height, weight, picture, type1, type2);
     typeColor(number, type1, type2);
 }
 
-function renderPokedexItem(i, name, number, picture, type1, type2) {
+function renderPokedexItem(i, name, number, height, weight, picture, type1, type2) {
     return `
-    <li class="list-group-item">
+    <li class="list-group-item" onclick="openDetails('${i}', '${name}', '${number}', '${height}', '${weight}', '${picture}', '${type1}', '${type2}')">
     <div><b># ${number}</b></div>
     <img src="${picture}">
     <div><b>${name}</b></div>
@@ -74,14 +56,49 @@ function renderPokedexItem(i, name, number, picture, type1, type2) {
     `
 }
 
+function openDetails(i, name, number, height, weight, picture, type1, type2) {
+    document.getElementById('dialog-bg').classList.remove('d-none'); 
+    document.getElementById('upper-dialog').innerHTML = renderDetails(i, name, number, height, weight, picture, type1, type2);
+    /*let stats = getStatsOf(Pokemon);
+    document.getElementById('lower-dialog').innerHTML += Stats(stat_name, stat_value);*/
+}
 
-function typeColor(i, type1, type2) {
-    typeColorGrass(i, type1, type2);
-    typeColorFire(i, type1, type2);
-    typeColorWater(i, type1, type2);
-    typeColorBug(i, type1, type2);
-    typeColorNormal(i, type1, type2);
-    typeColorPoison(i, type1, type2);
+function renderDetails(i, name, number, height, weight, picture, type1, type2) {
+    return `
+    <div>
+        <div># ${number}<div>
+        <div>${name}<div>
+        <div>${height} m<div>
+        <div>${weight} kg<div>
+        <img src="${picture}">
+        <div>${type1}<div>
+        <div>${type2}<div>
+    </div>
+    `
+}
+
+/*function getStatsOf(Pokemon) {
+    for (let i = 0; i < Pokemon['stats'].length; i++) {
+        let stat_name = Pokemon.stats[i].stat.name;
+        let stat_value = Pokemon.stats[i].base_stat;
+        document.getElementById('stats').innerHTML += Stats(stat_name, stat_value);// Stats werden auf der Startseit nicht benötigt, erst im Pop-Up
+    }
+}
+
+function Stats(stat_name, stat_value) {
+    return `
+    <div>${stat_name}</div>
+    <div>${stat_value}</div>
+    `
+}*/
+
+function typeColor(number, type1, type2) {
+    typeColorGrass(number, type1, type2);
+    typeColorFire(number, type1, type2);
+    typeColorWater(number, type1, type2);
+    typeColorBug(number, type1, type2);
+    typeColorNormal(number, type1, type2);
+    typeColorPoison(number, type1, type2);
 }
 
 function typeColorGrass(number, type1, type2) {
@@ -151,5 +168,3 @@ function typeColorPoison(number, type1, type2) {
         document.getElementById(`${number}${type2}`).classList.add('b-none');
     }
 }
-
-// Daten werden korrekt gezogen. Umsetzung der Startseite mit Bild und Infos kann umgesetzt werden 
