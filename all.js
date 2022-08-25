@@ -1,10 +1,12 @@
 let firstPokemon; //Variable für die ersten 20 Pokemon, die per API geladen werden
-let url = 'https://pokeapi.co/api/v2/pokemon';
+let url = 'https://pokeapi.co/api/v2/pokemon?limit=150&offset=0';
+
 
 async function loadFirstPokemon() {
     response = await fetch(url);
     let firstPokemon = await response.json();
     loadSinglePokemon(firstPokemon);
+    console.log(firstPokemon);
 }
 
 async function loadSinglePokemon(firstPokemon) {
@@ -12,10 +14,15 @@ async function loadSinglePokemon(firstPokemon) {
     for (let i = 0; i < singlePokemon.length; i++) {
         let responsePokemon = await fetch(singlePokemon[i].url);
         let Pokemon = await responsePokemon.json();
+        /*console.log(Pokemon);*/
+        /*getStats(Pokemon);*/
+
         loadSinglePokemonInfos(i, Pokemon);
     }
 
 }
+
+    
 
 function loadSinglePokemonInfos(i, Pokemon) {
     let name = Pokemon.name[0].toUpperCase() + Pokemon.name.slice(1);
@@ -24,29 +31,41 @@ function loadSinglePokemonInfos(i, Pokemon) {
     let weight = Pokemon.weight;
     let picture = Pokemon.sprites['front_default'];
     let type1 = getTypeOneOf(Pokemon);
-    let type2 =getTypeTwoOf(Pokemon);
-    renderPokedex(i, name, number, height, weight, picture, type1, type2);
+    let type2 = getTypeTwoOf(Pokemon);
+    let HP = Pokemon.stats[0].stat.name;
+    let HPvalue = Pokemon.stats[0].base_stat;
+    let Att = Pokemon.stats[1].stat.name;
+    let Attvalue = Pokemon.stats[1].base_stat;
+    let Def = Pokemon.stats[2].stat.name;
+    let Defvalue = Pokemon.stats[2].base_stat;
+    let SpA = Pokemon.stats[3].stat.name;
+    let SpAvalue = Pokemon.stats[3].base_stat;
+    let SpD = Pokemon.stats[4].stat.name;
+    let SpDvalue = Pokemon.stats[4].base_stat;
+    let Speed = Pokemon.stats[5].stat.name;
+    let Speedvalue = Pokemon.stats[5].base_stat;
+    renderPokedex(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue);
 }
 
 function getTypeOneOf(Pokemon) {
-        return Pokemon.types[0].type.name[0].toUpperCase() + Pokemon.types[0].type.name.slice(1);
+    return Pokemon.types[0].type.name[0].toUpperCase() + Pokemon.types[0].type.name.slice(1);
 }
 function getTypeTwoOf(Pokemon) {
     if (Pokemon.types.length == 2) {
         return Pokemon.types[1].type.name[0].toUpperCase() + Pokemon.types[1].type.name.slice(1);
     } else {
-     return '';   
+        return '';
     }
 }
 
-function renderPokedex(i, name, number, height, weight, picture, type1, type2) {
-    document.getElementById('pokedex').innerHTML += renderPokedexItem(i, name, number, height, weight, picture, type1, type2);
+function renderPokedex(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue) {
+    document.getElementById('pokedex').innerHTML += renderPokedexItem(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue);
     typeColor(number, type1, type2);
 }
 
-function renderPokedexItem(i, name, number, height, weight, picture, type1, type2) {
+function renderPokedexItem(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue) {
     return `
-    <li class="list-group-item" onclick="openDetails('${i}', '${name}', '${number}', '${height}', '${weight}', '${picture}', '${type1}', '${type2}')">
+    <li class="list-group-item" onclick="openDetails('${i}', '${name}', '${number}', '${height}', '${weight}', '${picture}', '${type1}', '${type2}', '${HP}', '${HPvalue}', '${Att}', '${Attvalue}', '${Def}', '${Defvalue}', '${SpA}', '${SpAvalue}', '${SpD}', '${SpDvalue}', '${Speed}', '${Speedvalue}')">
     <div><b># ${number}</b></div>
     <img src="${picture}">
     <div><b>${name}</b></div>
@@ -56,14 +75,12 @@ function renderPokedexItem(i, name, number, height, weight, picture, type1, type
     `
 }
 
-function openDetails(i, name, number, height, weight, picture, type1, type2) {
-    document.getElementById('dialog-bg').classList.remove('d-none'); 
-    document.getElementById('upper-dialog').innerHTML = renderDetails(i, name, number, height, weight, picture, type1, type2);
-    /*let stats = getStatsOf(Pokemon);
-    document.getElementById('lower-dialog').innerHTML += Stats(stat_name, stat_value);*/
+function openDetails(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue) {
+    document.getElementById('dialog-bg').classList.remove('d-none');
+    document.getElementById('upper-dialog').innerHTML = renderDialog(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue);
 }
 
-function renderDetails(i, name, number, height, weight, picture, type1, type2) {
+function renderDialog(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue) {
     return `
     <div>
         <div># ${number}<div>
@@ -73,24 +90,16 @@ function renderDetails(i, name, number, height, weight, picture, type1, type2) {
         <img src="${picture}">
         <div>${type1}<div>
         <div>${type2}<div>
+        <div>${HP}<div><div>${HPvalue}<div>
+        <div>${Att}<div><div>${Attvalue}<div>
+        <div>${Def}<div><div>${Defvalue}<div>
+        <div>${SpA}<div><div>${SpAvalue}<div>
+        <div>${SpD}<div><div>${SpDvalue}<div>
+        <div>${Speed}<div><div>${Speedvalue}<div>
     </div>
     `
 }
 
-/*function getStatsOf(Pokemon) {
-    for (let i = 0; i < Pokemon['stats'].length; i++) {
-        let stat_name = Pokemon.stats[i].stat.name;
-        let stat_value = Pokemon.stats[i].base_stat;
-        document.getElementById('stats').innerHTML += Stats(stat_name, stat_value);// Stats werden auf der Startseit nicht benötigt, erst im Pop-Up
-    }
-}
-
-function Stats(stat_name, stat_value) {
-    return `
-    <div>${stat_name}</div>
-    <div>${stat_value}</div>
-    `
-}*/
 
 function typeColor(number, type1, type2) {
     typeColorGrass(number, type1, type2);
