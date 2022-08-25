@@ -14,15 +14,9 @@ async function loadSinglePokemon(firstPokemon) {
     for (let i = 0; i < singlePokemon.length; i++) {
         let responsePokemon = await fetch(singlePokemon[i].url);
         let Pokemon = await responsePokemon.json();
-        /*console.log(Pokemon);*/
-        /*getStats(Pokemon);*/
-
         loadSinglePokemonInfos(i, Pokemon);
     }
-
 }
-
-    
 
 function loadSinglePokemonInfos(i, Pokemon) {
     let name = Pokemon.name[0].toUpperCase() + Pokemon.name.slice(1);
@@ -83,13 +77,44 @@ function openDetails(i, name, number, height, weight, picture, type1, type2, HP,
 function renderDialog(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue) {
     return `
     <div>
-        <div># ${number}<div>
-        <div>${name}<div>
-        <div>${height} m<div>
-        <div>${weight} kg<div>
-        <img src="${picture}">
-        <div>${type1}<div>
-        <div>${type2}<div>
+    <nav class="navbar bg-light">
+        <div class="container-fluid display-nav">
+            <span class="navbar-brand mb-0 h1">Pokemon-Infos</span>
+            <span class="navbar-brand mb-0 h1">Pokemon-Details</span>
+        </div>
+</nav>
+<div class="display-cards">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body display-pic">
+            <h5 class="card-title">${name}</h5>
+            <img src="${picture}">
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body display-stats">
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item">Nr.</li>
+                <li class="list-group-item">${number}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal-sm">
+                <li class="list-group-item">Gewicht</li>
+                <li class="list-group-item">${weight} kg</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item">Größe</li>
+                <li class="list-group-item">${height} m</li>
+            </ul>
+            <ul class="list-group list-group-horizontal-sm">
+                <li class="list-group-item">Typ 1</li>
+                <li class="list-group-item">${type1}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal-sm">
+                <li class="list-group-item">Typ 2</li>
+                <li class="list-group-item">${type2}</li>
+            </ul>
+        </div>
+    </div>
+</div>
         <div>${HP}<div><div>${HPvalue}<div>
         <div>${Att}<div><div>${Attvalue}<div>
         <div>${Def}<div><div>${Defvalue}<div>

@@ -156,3 +156,23 @@ body {
     padding: 24px;
 }
 
+.display-nav {
+    justify-content: space-around !important;
+}
+
+.display-pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.display-pic img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
+
+.display-cards {
+    display: flex;
+}
