@@ -1,10 +1,10 @@
-let firstPokemon; //Variable für die ersten 20 Pokemon, die per API geladen werden
+let firstPokemon;
 let url = 'https://pokeapi.co/api/v2/pokemon?limit=150&offset=0';
 
 
 async function loadFirstPokemon() {
     response = await fetch(url);
-    let firstPokemon = await response.json();
+    firstPokemon = await response.json();
     loadSinglePokemon(firstPokemon);
     console.log(firstPokemon);
 }
@@ -21,24 +21,12 @@ async function loadSinglePokemon(firstPokemon) {
 function loadSinglePokemonInfos(i, Pokemon) {
     let name = Pokemon.name[0].toUpperCase() + Pokemon.name.slice(1);
     let number = Pokemon.id;
-    let height = Pokemon.height;
-    let weight = Pokemon.weight;
     let picture = Pokemon.sprites['front_default'];
     let type1 = getTypeOneOf(Pokemon);
     let type2 = getTypeTwoOf(Pokemon);
-    let HP = Pokemon.stats[0].stat.name;
-    let HPvalue = Pokemon.stats[0].base_stat;
-    let Att = Pokemon.stats[1].stat.name;
-    let Attvalue = Pokemon.stats[1].base_stat;
-    let Def = Pokemon.stats[2].stat.name;
-    let Defvalue = Pokemon.stats[2].base_stat;
-    let SpA = Pokemon.stats[3].stat.name;
-    let SpAvalue = Pokemon.stats[3].base_stat;
-    let SpD = Pokemon.stats[4].stat.name;
-    let SpDvalue = Pokemon.stats[4].base_stat;
-    let Speed = Pokemon.stats[5].stat.name;
-    let Speedvalue = Pokemon.stats[5].base_stat;
-    renderPokedex(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue);
+    let type1ID = `${number}${type1}`
+    let type2ID = `${number}${type2}`
+    renderPokedex(i, name, number, picture, type1, type2, type1ID, type2ID);
 }
 
 function getTypeOneOf(Pokemon) {
@@ -52,29 +40,57 @@ function getTypeTwoOf(Pokemon) {
     }
 }
 
-function renderPokedex(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue) {
-    document.getElementById('pokedex').innerHTML += renderPokedexItem(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue);
-    typeColor(number, type1, type2);
+function renderPokedex(i, name, number, picture, type1, type2, type1ID, type2ID) {
+    document.getElementById('pokedex').innerHTML += renderPokedexItem(i, name, number, picture, type1, type2, type1ID, type2ID);
+    typeColor(type1, type2, type1ID, type2ID);
 }
 
-function renderPokedexItem(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue) {
+function renderPokedexItem(i, name, number,picture, type1, type2, type1ID, type2ID) {
     return `
-    <li class="list-group-item" onclick="openDetails('${i}', '${name}', '${number}', '${height}', '${weight}', '${picture}', '${type1}', '${type2}', '${HP}', '${HPvalue}', '${Att}', '${Attvalue}', '${Def}', '${Defvalue}', '${SpA}', '${SpAvalue}', '${SpD}', '${SpDvalue}', '${Speed}', '${Speedvalue}')">
+    <li id="${i}" class="list-group-item" onclick="openDetails('${number}')">
     <div><b># ${number}</b></div>
     <img src="${picture}">
     <div><b>${name}</b></div>
-    <div id="${number}${type1}" class="type">${type1}</div>
-    <div id="${number}${type2}" class="type">${type2}</div>
+    <div id="${type1ID}" class="type">${type1}</div>
+    <div id="${type2ID}" class="type">${type2}</div>
     </li>
     `
 }
 
-function openDetails(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue) {
+async function openDetails(number) {
+    singleResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${number}/`);
+    let currentPokemon = await singleResponse.json();
+    loadDialogInfos(currentPokemon);
     document.getElementById('dialog-bg').classList.remove('d-none');
-    document.getElementById('upper-dialog').innerHTML = renderDialog(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue);
 }
 
-function renderDialog(i, name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue) {
+function loadDialogInfos(currentPokemon)  {
+    let name = currentPokemon.name[0].toUpperCase() + currentPokemon.name.slice(1);
+    let number = currentPokemon.id;
+    let height = currentPokemon.height;
+    let weight = currentPokemon.weight;
+    let picture = currentPokemon.sprites['front_default'];
+    let type1 = getTypeOneOf(currentPokemon);
+    let type2 = getTypeTwoOf(currentPokemon);
+    let HP = currentPokemon.stats[0].stat.name;
+    let HPvalue = currentPokemon.stats[0].base_stat;
+    let Att = currentPokemon.stats[1].stat.name;
+    let Attvalue = currentPokemon.stats[1].base_stat;
+    let Def = currentPokemon.stats[2].stat.name;
+    let Defvalue = currentPokemon.stats[2].base_stat;
+    let SpA = currentPokemon.stats[3].stat.name;
+    let SpAvalue = currentPokemon.stats[3].base_stat;
+    let SpD = currentPokemon.stats[4].stat.name;
+    let SpDvalue = currentPokemon.stats[4].base_stat;
+    let Speed = currentPokemon.stats[5].stat.name;
+    let Speedvalue = currentPokemon.stats[5].base_stat;
+    let type1ID = 'display-'+`${number}${type1}`;
+    let type2ID = 'display-'+`${number}${type2}`;
+    document.getElementById('upper-dialog').innerHTML = renderDialog(name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue, type1ID, type2ID);
+    typeColor(type1, type2, type1ID, type2ID);
+}
+
+function renderDialog(name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue, type1ID, type2ID) {
     return `
     <div>
     <nav class="navbar bg-light">
@@ -82,123 +98,108 @@ function renderDialog(i, name, number, height, weight, picture, type1, type2, HP
             <span class="navbar-brand mb-0 h1">Pokemon-Infos</span>
             <span class="navbar-brand mb-0 h1">Pokemon-Details</span>
         </div>
-</nav>
-<div class="display-cards">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body display-pic">
-            <h5 class="card-title">${name}</h5>
-            <img src="${picture}">
+    </nav>
+    <div class="display-cards">
+        <div class="button-line">
+            <img class="button-style" onclick="swapLeft(${number})" src="img/left_arrow.png"></img>
+            <img onclick="closeDialog()" class="button-style" src="img/close.png"></img>
+            <img class="button-style" onclick="swapRight(${number})" src="img/right_arrow.png"></img></div>
         </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-        <div class="card-body display-stats">
-            <ul class="list-group list-group-horizontal">
-                <li class="list-group-item">Nr.</li>
-                <li class="list-group-item">${number}</li>
-            </ul>
-            <ul class="list-group list-group-horizontal-sm">
-                <li class="list-group-item">Gewicht</li>
-                <li class="list-group-item">${weight} kg</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-                <li class="list-group-item">Größe</li>
-                <li class="list-group-item">${height} m</li>
-            </ul>
-            <ul class="list-group list-group-horizontal-sm">
-                <li class="list-group-item">Typ 1</li>
-                <li class="list-group-item">${type1}</li>
-            </ul>
-            <ul class="list-group list-group-horizontal-sm">
-                <li class="list-group-item">Typ 2</li>
-                <li class="list-group-item">${type2}</li>
-            </ul>
+        <div class="upper-display">
+            <div class="card" style="width: 50%;">
+                <div class="card-body display-pic">
+                    <h5 class="card-title">${name}</h5>
+                    <img src="${picture}">
+                </div>
+            </div>
+            <div class="card" style="width: 50%;">
+                <div class="card-body display-infos">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item">Nr.</li>
+                        <li class="list-group-item">${number}</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal-sm">
+                        <li class="list-group-item">Gewicht</li>
+                        <li class="list-group-item">${weight} kg</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item">Größe</li>
+                        <li class="list-group-item">${height} m</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal-sm">
+                        <li class="list-group-item">Typ 1</li>
+                        <li id ="${type1ID}" class="list-group-item">${type1}</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal-sm">
+                        <li class="list-group-item">Typ 2</li>
+                        <li id ="${type2ID}" class="list-group-item">${type2}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+            <div class="card" style="width: 100%;">
+                <div class="card-body display-stats">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item">${HP}</li>
+                        <li class="list-group-item">${HPvalue}</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal-sm">
+                        <li class="list-group-item">${Att}</li>
+                        <li class="list-group-item">${Attvalue}</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item">${Def}</li>
+                        <li class="list-group-item">${Defvalue}</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal-sm">
+                        <li class="list-group-item">${SpA}</li>
+                        <li class="list-group-item">${SpAvalue}</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal-sm">
+                        <li class="list-group-item">${SpD}</li>
+                        <li class="list-group-item">${SpDvalue}</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal-sm">
+                        <li class="list-group-item">${Speed}</li>
+                        <li class="list-group-item">${Speedvalue}</li>
+                    </ul>
+                </div>     
+            </div>
         </div>
     </div>
 </div>
-        <div>${HP}<div><div>${HPvalue}<div>
-        <div>${Att}<div><div>${Attvalue}<div>
-        <div>${Def}<div><div>${Defvalue}<div>
-        <div>${SpA}<div><div>${SpAvalue}<div>
-        <div>${SpD}<div><div>${SpDvalue}<div>
-        <div>${Speed}<div><div>${Speedvalue}<div>
-    </div>
     `
 }
 
-
-function typeColor(number, type1, type2) {
-    typeColorGrass(number, type1, type2);
-    typeColorFire(number, type1, type2);
-    typeColorWater(number, type1, type2);
-    typeColorBug(number, type1, type2);
-    typeColorNormal(number, type1, type2);
-    typeColorPoison(number, type1, type2);
+function closeDialog() {
+    document.getElementById('dialog-bg').classList.add('d-none');
 }
 
-function typeColorGrass(number, type1, type2) {
-    if (type1 == 'Grass') {
-        document.getElementById(`${number}${type1}`).classList.add('grass');
-    }
-
-    if (type2 == 'Poison') {
-        document.getElementById(`${number}${type2}`).classList.add('poison');
-    }
-
-    if (type2 == '') {
-        document.getElementById(`${number}${type2}`).classList.add('b-none');
-    }
+function swapLeft(i) {
+    let swapLeft = ifSwapLeft(i);
+    openDetails(swapLeft);
+}
+//Funktion zum Wechseln des Pokedex-Eintrags nach rechts
+function swapRight(i) {
+    let swapRight = ifSwapRight(i);
+    openDetails(swapRight);
 }
 
-function typeColorFire(number, type1, type2) {
-    if (type1 == 'Fire') {
-        document.getElementById(`${number}${type1}`).classList.add('fire');
+//Funktion zum Wechseln des Pokedex-Eintrags nach links
+function ifSwapLeft(i) {
+    if (i == 1) {
+        i = firstPokemon.results.length;
+    } else {
+        i = i - 1;
     }
-
-    if (type2 == '') {
-        document.getElementById(`${number}${type2}`).classList.add('b-none');
-    }
-
-    if (type2 == 'Flying') {
-        document.getElementById(`${number}${type2}`).classList.add('flying');
-    }
+    return i;
 }
 
-function typeColorWater(number, type1, type2) {
-    if (type1 == 'Water') {
-        document.getElementById(`${number}${type1}`).classList.add('water');
+function ifSwapRight(i) {
+    if (i >= firstPokemon.results.length) {
+        i = 1;
+    } else {
+        i = i + 1;
     }
-
-    if (type2 == '') {
-        document.getElementById(`${number}${type2}`).classList.add('b-none');
-    }
-}
-
-function typeColorBug(number, type1, type2) {
-    if (type1 == 'Bug') {
-        document.getElementById(`${number}${type1}`).classList.add('bug');
-    }
-
-    if (type2 == '') {
-        document.getElementById(`${number}${type2}`).classList.add('b-none');
-    }
-}
-
-function typeColorNormal(number, type1, type2) {
-    if (type1 == 'Normal') {
-        document.getElementById(`${number}${type1}`).classList.add('normal');
-    }
-
-    if (type2 == '') {
-        document.getElementById(`${number}${type2}`).classList.add('b-none');
-    }
-}
-
-function typeColorPoison(number, type1, type2) {
-    if (type1 == 'Poison') {
-        document.getElementById(`${number}${type1}`).classList.add('poison');
-    }
-
-    if (type2 == '') {
-        document.getElementById(`${number}${type2}`).classList.add('b-none');
-    }
+    return i;
 }

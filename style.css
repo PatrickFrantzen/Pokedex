@@ -91,38 +91,88 @@ body {
 }
 
 .grass {
-    background-color: rgb(26, 148, 26);
-    color: white;
+    background-color: rgb(26, 148, 26) !important;
+    color: white!important;
 }
 
 .fire {
-    background-color: rgb(221, 9, 9);
-    color: white;
+    background-color: rgb(221, 9, 9)!important;
+    color: white!important;
 }
 
 .water {
-    background-color: rgb(25, 126, 221);
-    color: white;
+    background-color: rgb(25, 126, 221) !important;
+    color: white !important;
 }
 
 .bug {
-    background-color: rgb(127, 223, 98);
-    color: white;
+    background-color: rgb(127, 223, 98) !important;
+    color: white !important;
 }
 
 .normal {
-    background-color: rgb(218, 223, 217);
-    color: white;
+    background-color: rgb(202, 187, 138) !important;
+    color: white !important;
 }
 
 .poison {
-    background-color: rgb(43, 253, 1);
-    color: black;
+    background-color: rgb(43, 253, 1) !important;
+    color: black !important;
 }
 
 .flying {
-    background-color: rgb(250, 178, 70);
-    color: black;
+    background-color: rgb(250, 178, 70) !important;
+    color: black !important;
+}
+
+.electric {
+    background-color: rgb(250, 247, 70) !important;
+    color: black !important;
+}
+
+.ground {
+    background-color: rgb(161, 97, 0) !important;
+    color: black !important;
+}
+
+.fairy {
+    background-color: rgb(243, 124, 237) !important;
+    color: black !important;
+}
+
+.fighting {
+    background-color: rgb(78, 53, 5) !important;
+    color: white !important;
+}
+
+.psychic {
+    background-color: rgb(74, 6, 77) !important;
+    color: white !important;
+}
+
+.rock {
+    background-color: rgb(116, 43, 1) !important;
+    color: white !important;
+}
+
+.steel {
+    background-color: rgb(54, 82, 116) !important;
+    color: black !important;
+}
+
+.ice {
+    background-color: rgb(20, 221, 228) !important;
+    color: black !important;
+}
+
+.ghost {
+    background-color: rgb(145, 75, 148) !important;
+    color: black !important;
+}
+
+.dragon {
+    background-color: rgb(255, 136, 0) !important;
+    color: black !important;
 }
 
 .b-none {
@@ -175,4 +225,23 @@ body {
 
 .display-cards {
     display: flex;
+    flex-direction: column;
+}
+
+.upper-display {
+    display: flex;
+}
+
+.button-line {
+    display: flex;
+    justify-content: center;
+}
+
+.button-style {
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
 }
