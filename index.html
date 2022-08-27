@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
-    <script src="single.js"></script>
+    <script src="template.js"></script>
     <script src="all.js"></script>
     <title>Pokedex</title>
 </head>
@@ -23,10 +24,10 @@
                 <nav class="navbar bg-light">
                     <div class="container-fluid">
                         <a class="navbar-brand">Pokedex</a>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                        <div class="d-flex" role="search">
+                            <input id="searchbar" class="form-control me-2" type="search" placeholder="Search Pokemon or ID" aria-label="Search">
+                            <button onclick="search()" class="btn btn-outline-success">Search</button>
+                        </div>
                     </div>
                 </nav>
                 <ul id="pokedex" class="list-group list-group-flush pokedex">
@@ -36,7 +37,7 @@
             </div>
             
         </div>
-        <span class="gameboy-text">Game Boy</span>
+        <span class="gameboy-text">Game Boy Limited Edition</span>
     </div>
     <div id="dialog-bg" class="dialog-bg d-none">
         <div id="dialog" class="dialog">

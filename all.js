@@ -19,14 +19,15 @@ async function loadSinglePokemon(firstPokemon) {
 }
 
 function loadSinglePokemonInfos(i, Pokemon) {
+    let id = i + 1;
     let name = Pokemon.name[0].toUpperCase() + Pokemon.name.slice(1);
     let number = Pokemon.id;
     let picture = Pokemon.sprites['front_default'];
     let type1 = getTypeOneOf(Pokemon);
     let type2 = getTypeTwoOf(Pokemon);
-    let type1ID = `${number}${type1}`
-    let type2ID = `${number}${type2}`
-    renderPokedex(i, name, number, picture, type1, type2, type1ID, type2ID);
+    let type1ID = `${number}${type1}${name}`
+    let type2ID = `${number}${type2}${name}`
+    renderPokedex(id, name, number, picture, type1, type2, type1ID, type2ID);
 }
 
 function getTypeOneOf(Pokemon) {
@@ -42,20 +43,9 @@ function getTypeTwoOf(Pokemon) {
 
 function renderPokedex(i, name, number, picture, type1, type2, type1ID, type2ID) {
     document.getElementById('pokedex').innerHTML += renderPokedexItem(i, name, number, picture, type1, type2, type1ID, type2ID);
-    typeColor(type1, type2, type1ID, type2ID);
+    typeColor(i, type1, type2, type1ID, type2ID);
 }
 
-function renderPokedexItem(i, name, number,picture, type1, type2, type1ID, type2ID) {
-    return `
-    <li id="${i}" class="list-group-item" onclick="openDetails('${number}')">
-    <div><b># ${number}</b></div>
-    <img src="${picture}">
-    <div><b>${name}</b></div>
-    <div id="${type1ID}" class="type">${type1}</div>
-    <div id="${type2ID}" class="type">${type2}</div>
-    </li>
-    `
-}
 
 async function openDetails(number) {
     singleResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${number}/`);
@@ -64,11 +54,23 @@ async function openDetails(number) {
     document.getElementById('dialog-bg').classList.remove('d-none');
 }
 
+async function search() {
+    let search = document.getElementById('searchbar').value;
+    search = search.toString().toLowerCase();
+    let searchResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${search}/`);
+    let searchPokemon = await searchResponse.json();
+    loadDialogInfos(searchPokemon);
+    document.getElementById('dialog-bg').classList.remove('d-none');
+    document.getElementById('searchbar').value = '';
+}
+
 function loadDialogInfos(currentPokemon)  {
     let name = currentPokemon.name[0].toUpperCase() + currentPokemon.name.slice(1);
     let number = currentPokemon.id;
-    let height = currentPokemon.height;
-    let weight = currentPokemon.weight;
+    let apiheight = currentPokemon.height;
+    let height = apiheight / 10;
+    let apiweight = currentPokemon.weight;
+    let weight = apiweight / 10;
     let picture = currentPokemon.sprites['front_default'];
     let type1 = getTypeOneOf(currentPokemon);
     let type2 = getTypeTwoOf(currentPokemon);
@@ -87,88 +89,7 @@ function loadDialogInfos(currentPokemon)  {
     let type1ID = 'display-'+`${number}${type1}`;
     let type2ID = 'display-'+`${number}${type2}`;
     document.getElementById('upper-dialog').innerHTML = renderDialog(name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue, type1ID, type2ID);
-    typeColor(type1, type2, type1ID, type2ID);
-}
-
-function renderDialog(name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue, type1ID, type2ID) {
-    return `
-    <div>
-    <nav class="navbar bg-light">
-        <div class="container-fluid display-nav">
-            <span class="navbar-brand mb-0 h1">Pokemon-Infos</span>
-            <span class="navbar-brand mb-0 h1">Pokemon-Details</span>
-        </div>
-    </nav>
-    <div class="display-cards">
-        <div class="button-line">
-            <img class="button-style" onclick="swapLeft(${number})" src="img/left_arrow.png"></img>
-            <img onclick="closeDialog()" class="button-style" src="img/close.png"></img>
-            <img class="button-style" onclick="swapRight(${number})" src="img/right_arrow.png"></img></div>
-        </div>
-        <div class="upper-display">
-            <div class="card" style="width: 50%;">
-                <div class="card-body display-pic">
-                    <h5 class="card-title">${name}</h5>
-                    <img src="${picture}">
-                </div>
-            </div>
-            <div class="card" style="width: 50%;">
-                <div class="card-body display-infos">
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">Nr.</li>
-                        <li class="list-group-item">${number}</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal-sm">
-                        <li class="list-group-item">Gewicht</li>
-                        <li class="list-group-item">${weight} kg</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">Größe</li>
-                        <li class="list-group-item">${height} m</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal-sm">
-                        <li class="list-group-item">Typ 1</li>
-                        <li id ="${type1ID}" class="list-group-item">${type1}</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal-sm">
-                        <li class="list-group-item">Typ 2</li>
-                        <li id ="${type2ID}" class="list-group-item">${type2}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-            <div class="card" style="width: 100%;">
-                <div class="card-body display-stats">
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">${HP}</li>
-                        <li class="list-group-item">${HPvalue}</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal-sm">
-                        <li class="list-group-item">${Att}</li>
-                        <li class="list-group-item">${Attvalue}</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">${Def}</li>
-                        <li class="list-group-item">${Defvalue}</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal-sm">
-                        <li class="list-group-item">${SpA}</li>
-                        <li class="list-group-item">${SpAvalue}</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal-sm">
-                        <li class="list-group-item">${SpD}</li>
-                        <li class="list-group-item">${SpDvalue}</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal-sm">
-                        <li class="list-group-item">${Speed}</li>
-                        <li class="list-group-item">${Speedvalue}</li>
-                    </ul>
-                </div>     
-            </div>
-        </div>
-    </div>
-</div>
-    `
+    typeColor(number, type1, type2, type1ID, type2ID);
 }
 
 function closeDialog() {
@@ -203,3 +124,4 @@ function ifSwapRight(i) {
     }
     return i;
 }
+

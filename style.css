@@ -1,5 +1,7 @@
 body {
     margin: 0;
+    font-family: 'Paytone One'!important;
+    scroll-behavior: smooth;
 }
 
 .gameboy {
@@ -16,6 +18,41 @@ body {
     font-size: 32px;
 }
 
+.navbar-brand {
+    font-size: 3rem !important;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: #0019b8;
+    -webkit-text-fill-color: #ffff00;
+    letter-spacing: 5px;
+    font-family: Impact, Charcoal, sans-serif;
+    text-shadow: 5px 4px 0px #0019b8;
+}
+
+.navbar {
+    border-radius: 10px;
+}
+
+.btn-outline-success {
+    --bs-btn-color: #0019b8 !important;
+    --bs-btn-border-color: #0019b8 !important;
+    --bs-btn-hover-color: yellow !important;
+    --bs-btn-hover-bg: #0019b8 !important;
+    --bs-btn-hover-border-color: #0019b8 !important;
+    --bs-btn-focus-shadow-rgb: 25,135,84 !important;
+    --bs-btn-active-color: yellow !important;
+    --bs-btn-active-bg: #0019b8 !important;
+    --bs-btn-active-border-color: #0019b8 !important;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important;
+    --bs-btn-disabled-color: #0019b8 !important;
+    --bs-btn-disabled-bg: transparent !important;
+    --bs-btn-disabled-border-color: #0019b8!important;
+    --bs-gradient: none !important;
+}
+
+.container-fluid {
+    justify-content: space-around !important;
+}
+
 .gb-display {
     height: 90vh;
     width: 95vw;
@@ -27,6 +64,7 @@ body {
     border-bottom-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 70px;
+    box-shadow: 5px 5px 38px 5px #000000;
 }
 .power-area {
     display: flex;
@@ -62,10 +100,25 @@ body {
     display: flex;
     flex-direction: column;
     background-color: white;
+    box-shadow: 5px 5px 20px 5px #000000;
 }
 
 .pokedex {
-    overflow: auto;
+    overflow-y: scroll;
+    font-size: 1.25rem;
+}
+
+.pokedex::-webkit-scrollbar{
+    width: 15px;
+}
+
+.pokedex::-webkit-scrollbar-track{
+    background-color: #0019b8;
+}
+
+.pokedex::-webkit-scrollbar-thumb {
+    background-color: yellow;
+    border-radius: 100px;
     
 }
 
@@ -76,7 +129,7 @@ body {
 }
 
 .pokedex li img {
-    height: 100px;
+    height: 125px;
 }
 
 .type {
@@ -88,100 +141,175 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
+    box-shadow: 5px 5px 15px 5px #000000;
 }
 
 .grass {
-    background-color: rgb(26, 148, 26) !important;
-    color: white!important;
+    background-color: #78C850 !important;
+    color: #000000!important;
 }
 
 .fire {
-    background-color: rgb(221, 9, 9)!important;
-    color: white!important;
+    background-color: #F08030!important;
+    color: #000000!important;
 }
 
 .water {
-    background-color: rgb(25, 126, 221) !important;
-    color: white !important;
+    background-color: #6699CC !important;
+    color: #000000 !important;
 }
 
 .bug {
-    background-color: rgb(127, 223, 98) !important;
-    color: white !important;
+    background-color: #9ACD32 !important;
+    color: #000000 !important;
 }
 
 .normal {
-    background-color: rgb(202, 187, 138) !important;
-    color: white !important;
+    background-color: #A8A878 !important;
+    color: #000000 !important;
 }
 
 .poison {
-    background-color: rgb(43, 253, 1) !important;
-    color: black !important;
+    background-color: #A040A0 !important;
+    color: #000000 !important;
 }
 
 .flying {
-    background-color: rgb(250, 178, 70) !important;
-    color: black !important;
+    background-color: 	#A890F0 !important;
+    color: #000000!important;
 }
 
 .electric {
-    background-color: rgb(250, 247, 70) !important;
-    color: black !important;
+    background-color: #F5C826 !important;
+    color: #000000 !important;
 }
 
 .ground {
-    background-color: rgb(161, 97, 0) !important;
-    color: black !important;
+    background-color: #e0cc94 !important;
+    color: #000000 !important;
 }
 
 .fairy {
     background-color: rgb(243, 124, 237) !important;
-    color: black !important;
+    color: #000000 !important;
 }
 
 .fighting {
-    background-color: rgb(78, 53, 5) !important;
-    color: white !important;
+    background-color: #993300 !important;
+    color: #000000 !important;
 }
 
 .psychic {
-    background-color: rgb(74, 6, 77) !important;
-    color: white !important;
+    background-color: #F85888 !important;
+    color: 	#111111 !important;
 }
 
 .rock {
-    background-color: rgb(116, 43, 1) !important;
-    color: white !important;
+    background-color: #99700D !important;
+    color: #000000 !important;
 }
 
 .steel {
-    background-color: rgb(54, 82, 116) !important;
-    color: black !important;
+    background-color: #B8B8D0 !important;
+    color: #000000 !important;
 }
 
 .ice {
-    background-color: rgb(20, 221, 228) !important;
-    color: black !important;
+    background-color: #98D8D8 !important;
+    color: #000000 !important;
 }
 
 .ghost {
-    background-color: rgb(145, 75, 148) !important;
-    color: black !important;
+    background-color: #bfaeda !important;
+    color: #000000 !important;
 }
 
 .dragon {
-    background-color: rgb(255, 136, 0) !important;
-    color: black !important;
+    background-color: #6699CC !important;
+    color: #000000!important;
 }
+
+.background-grass {
+    background-image:linear-gradient(to bottom left, rgb(0, 255, 34), rgb(0, 70, 3))
+}
+
+.background-fire {
+    background-image:linear-gradient(to bottom left, rgb(255, 72, 0), rgb(119, 2, 2))
+}
+
+.background-water {
+    background-image:linear-gradient(to bottom left, rgb(78, 166, 248), rgb(2, 23, 119))
+}
+
+.background-bug {
+    background-image:linear-gradient(to bottom left, #b6f538, #4c6e08)
+}
+
+.background-normal {
+    background-image:linear-gradient(to bottom left, #e2e2b4, #4e4e38)
+}
+
+.background-poison {
+    background-image:linear-gradient(to bottom left, #ec9bec , #520952)
+}
+
+.background-flying {
+    background-image:linear-gradient(to bottom left, #cbbcf7 , #6450a1)
+}
+
+.background-electric {
+    background-image:linear-gradient(to bottom left, #f5dd85 , #aa8605)
+}
+
+.background-ground {
+    background-image:linear-gradient(to bottom left, #fcedc6 , #745e24)
+}
+
+.background-fairy {
+    background-image:linear-gradient(to bottom left, rgb(248, 196, 246) , rgb(243, 55, 234))
+}
+
+.background-fighting {
+    background-image:linear-gradient(to bottom left, #e9804c, #5e1f00)
+}
+
+.background-psychic {
+    background-image:linear-gradient(to bottom left, #fcaec5, #b41646)
+}
+
+.background-rock {
+    background-image:linear-gradient(to bottom left, #99814a , #573d01)
+}
+
+.background-steel {
+    background-image:linear-gradient(to bottom left, #e1e1ec , #575763)  
+}
+
+.background-ice {
+    background-image:linear-gradient(to bottom left, #d4f8f8, #508f8f)
+}
+
+.background-ghost {
+    background-image:linear-gradient(to bottom left, #eae2f7, #6b5391)
+}
+
+.background-dragon {
+    background-image:linear-gradient(to bottom left, #b2d3f5, #17599c)
+    }
+
 
 .b-none {
     border: unset;
     pointer-events: none;
 }
 
+.shadow-none {
+    box-shadow: unset;
+}
+
 .list-group-item:hover {
-    background-color: lightgrey;
+    opacity: 0.85;
+    cursor: pointer;
 }
 
 .dialog-bg {
@@ -198,16 +326,18 @@ body {
 }
 
 .dialog {
-    width: 50vw;
-    height: 75vh;
+    width: 60vw;
+    height: 90vh;
     background-color: white;
-    border: 1px solid lightgray;
+    border: unset;
     border-radius: 10px;
     padding: 24px;
+    background-image:linear-gradient(to bottom left, #000000, #f8fafc, #000000)
 }
 
 .display-nav {
     justify-content: space-around !important;
+    background-color: transparent !important;
 }
 
 .display-pic {
@@ -215,6 +345,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: transparent;
 }
 
 .display-pic img {
@@ -226,10 +357,21 @@ body {
 .display-cards {
     display: flex;
     flex-direction: column;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 .upper-display {
     display: flex;
+    background-color: transparent;
+}
+
+.card, .list-group-item {
+    border: unset !important;
+}
+
+.card-background  {
+    background-color: transparent !important;
 }
 
 .button-line {
@@ -242,6 +384,38 @@ body {
     margin-right: 5px;
     margin-left: 5px;
     cursor: pointer;
-    background-color: rgb(255, 255, 255);
+    background-color: transparent;
     border-radius: 50%;
+}
+
+.display-infos {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    text-align: left;
+}
+
+.display-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.size-infos {
+    width: 150px ;
+}
+
+.size-stats {
+    width: 175px;
+}
+
+.text-align {
+    text-align: center;
+}
+
+.flex-start {
+    display: flex !important;
+    justify-content: flex-start !important;
 }
