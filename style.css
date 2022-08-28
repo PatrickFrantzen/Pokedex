@@ -126,10 +126,19 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    text-align: center;
 }
 
 .pokedex li img {
     height: 125px;
+}
+
+.number {
+    width: 65px;
+}
+
+.name {
+    width: 125px;
 }
 
 .type {
@@ -142,6 +151,151 @@ body {
     align-items: center;
     text-align: center;
     box-shadow: 5px 5px 15px 5px #000000;
+    margin-right: 15px;
+}
+
+.b-none {
+    border: unset;
+    pointer-events: none;
+}
+
+.shadow-none {
+    box-shadow: unset;
+}
+
+.list-group-item:hover {
+    opacity: 0.85;
+    cursor: pointer;
+}
+
+.dialog-bg {
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog {
+    width: 60vw;
+    height: 88vh;
+    background-color: white;
+    border: unset;
+    border-radius: 10px;
+    padding: 24px;
+    background-image:linear-gradient(to bottom left, #000000, #f8fafc, #000000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upper-dialog {
+    display: flex;
+    justify-content: center;
+}
+
+.display-nav {
+    justify-content: space-around !important;
+    background-color: transparent !important;
+}
+
+.display-pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: transparent;
+}
+
+.display-pic img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
+
+.display-cards {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.upper-display {
+    display: flex;
+    background-color: transparent;
+}
+
+.card, .list-group-item {
+    border: unset !important;
+}
+
+.card-background  {
+    background-color: transparent !important;
+}
+
+.button-line {
+    display: flex;
+    justify-content: center;
+}
+
+.button-style {
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 50%;
+}
+
+.button-style:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+
+.display-infos {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    text-align: left;
+}
+
+.display-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.size-infos {
+    width: 150px ;
+}
+
+.size-infos:hover {
+    opacity: unset;
+    cursor: unset;
+} 
+
+.size-stats {
+    width: 175px;
+}
+
+.size-stats:hover {
+    opacity: unset;
+    cursor: unset;
+}
+
+.text-align {
+    text-align: center;
+}
+
+.flex-start {
+    display: flex !important;
+    justify-content: flex-start !important;
 }
 
 .grass {
@@ -297,125 +451,181 @@ body {
     background-image:linear-gradient(to bottom left, #b2d3f5, #17599c)
     }
 
+    @media screen and (max-width:992px) {
+        .type {
+            width: 90px;
+            font-size: 18px;
+        }
 
-.b-none {
-    border: unset;
-    pointer-events: none;
-}
+        .name {
+            margin-right: 15px;
+        }
 
-.shadow-none {
-    box-shadow: unset;
-}
+        .size-infos {
+            width: 100px;
+        }
+    }
 
-.list-group-item:hover {
-    opacity: 0.85;
-    cursor: pointer;
-}
+    @media screen and (max-width:768px) {
+        
+        .number {
+            font-size: 18px;
+        }
 
-.dialog-bg {
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: 999;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        .name {
+            font-size: 18px;
+            
+        }
 
-.dialog {
-    width: 60vw;
-    height: 90vh;
-    background-color: white;
-    border: unset;
-    border-radius: 10px;
-    padding: 24px;
-    background-image:linear-gradient(to bottom left, #000000, #f8fafc, #000000)
-}
+        .type {
+            width: 80px;
+            font-size: 17px;
+        }
 
-.display-nav {
-    justify-content: space-around !important;
-    background-color: transparent !important;
-}
+        .display-pic img {
+            width: 150px;
+            height: 150px;
+        }
 
-.display-pic {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: transparent;
-}
+        .dialog {
+            width: 80vw;
+        }
 
-.display-pic img {
-    width: 200px;
-    height: 200px;
-    object-fit: contain;
-}
+        .size-infos {
+            width: 100px;
+        }
 
-.display-cards {
-    display: flex;
-    flex-direction: column;
-    margin-top: 16px;
-    margin-bottom: 16px;
-}
+        .flex-start {
+            display: unset !important;
+        }
+    }
 
-.upper-display {
-    display: flex;
-    background-color: transparent;
-}
+    @media screen and (max-width:590px) {
+        .gb-display{
+            height: 100vh;
+            width: 100vw;
+            border-top-left-radius: unset; 
+            border-bottom-left-radius: unset;
+            border-top-right-radius: unset;
+            border-bottom-right-radius: unset;
+        }
 
-.card, .list-group-item {
-    border: unset !important;
-}
+        .content {
+            height: 95vh;
+            width: 80vw;
+        }
 
-.card-background  {
-    background-color: transparent !important;
-}
+        .gameboy-text {
+            display: none;
+        }
 
-.button-line {
-    display: flex;
-    justify-content: center;
-}
+        .pokedex::-webkit-scrollbar{
+            width: 10px;
+        }
+        
+        .number {
+            font-size: 15px;
+            width: 45px;
+        }
 
-.button-style {
-    margin-top: 10px;
-    margin-right: 5px;
-    margin-left: 5px;
-    cursor: pointer;
-    background-color: transparent;
-    border-radius: 50%;
-}
+        .pokedex li img {
+            height: 100px;
+        }
+        
+        .name {
+            font-size: 15px;
+            margin-right: 5px;
+        }
 
-.display-infos {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    text-align: left;
-}
+        .type {
+            width: 75px;
+            font-size: 15px;
+            margin-right: 5px;
+        }
 
-.display-stats {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+        .list-group-item {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+    }
 
-.size-infos {
-    width: 150px ;
-}
+    @media screen and (min-width:320px) and (max-width:575px) {
 
-.size-stats {
-    width: 175px;
-}
+        .content {
+            height: 100vh;
+            width: 100vw;
+        }
 
-.text-align {
-    text-align: center;
-}
+        .power-area {
+            display: none;
+        }
 
-.flex-start {
-    display: flex !important;
-    justify-content: flex-start !important;
-}
+        .form-control {
+            font-size: 15px !important;
+        }
+        .number {
+            font-size: 12px;
+        }
+
+        .pokedex li img {
+            height: 75px;
+        }
+
+        .name {
+            font-size: 12px;
+            width: 75px;
+        }
+        
+        .type {
+            width: 45px;
+            height: 40px;
+            font-size: 11px;
+            margin-right: 5px;
+        }
+
+        .dialog {
+            width: 100vw;
+            height: 100vh;
+            border-radius: unset;
+        }
+
+       .text-align {
+        flex-direction: row !important;
+       }
+
+       .direction {
+        flex-direction: row !important;
+       }
+
+       .navbar-display {
+        font-size: 36px !important;
+        margin-right: 0 !important;
+       }
+
+       .display-pic {
+        padding: 0 !important;
+       }
+
+       .display-infos {
+        padding: 0 !important;
+        align-items: unset;
+       }
+
+       .display-cards {
+        margin-top: 0;
+        margin-bottom: 0;
+       }
+
+       .display-stats {
+        align-items: unset;
+       }
+        
+       .upper-display {
+        flex-direction: column;
+       }
+
+       .card-background {
+        width: 100% !important;
+       }
+    }
+    

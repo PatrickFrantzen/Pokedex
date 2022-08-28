@@ -2,9 +2,9 @@
 function renderPokedexItem(i, name, number,picture, type1, type2, type1ID, type2ID) {
     return `
     <li id="${i}" class="list-group-item" onclick="openDetails('${number}')">
-    <div><b># ${number}</b></div>
+    <div class="number"><b># ${number}</b></div>
     <img src="${picture}">
-    <div><b>${name}</b></div>
+    <div class="name"><b>${name}</b></div>
     <div id="${type1ID}" class="type">${type1}</div>
     <div id="${type2ID}" class="type">${type2}</div>
     </li>
@@ -13,10 +13,12 @@ function renderPokedexItem(i, name, number,picture, type1, type2, type1ID, type2
 
 function renderDialog(name, number, height, weight, picture, type1, type2, HP, HPvalue, Att, Attvalue, Def, Defvalue, SpA, SpAvalue, SpD, SpDvalue, Speed, Speedvalue, type1ID, type2ID) {
     return `
-    <div>
+    <div id="dialog${name}" class="dialog">
+            <div id="upper-dialog" class="upper-dialog">
+            <div>
     <nav class="navbar">
-        <div class="container-fluid display-nav">
-            <span class="navbar-brand mb-0 h1">Pokemon-Infos</span>
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1 navbar-display">Pokemon-Infos</span>
         </div>
     </nav>
     <div class="display-cards">
@@ -34,23 +36,23 @@ function renderDialog(name, number, height, weight, picture, type1, type2, HP, H
             </div>
             <div class="card card-background" style="width: 50%;">
                 <div class="card-body card-background display-infos">
-                    <ul class="list-group list-group-horizontal">
+                    <ul class="list-group list-group-horizontal direction text-align">
                         <li class="list-group-item card-background size-infos">No.</li>
                         <li class="list-group-item card-background size-infos">${number}</li>
                     </ul>
-                    <ul class="list-group list-group-horizontal-sm">
+                    <ul class="list-group list-group-horizontal-sm direction text-align">
                         <li class="list-group-item card-background size-infos">weight</li>
                         <li class="list-group-item card-background size-infos">${weight} kg</li>
                     </ul>
-                    <ul class="list-group list-group-horizontal">
+                    <ul class="list-group list-group-horizontal direction text-align">
                         <li class="list-group-item card-background size-infos">height</li>
                         <li class="list-group-item card-background size-infos">${height} m</li>
                     </ul>
-                    <ul class="list-group list-group-horizontal-sm">
+                    <ul class="list-group list-group-horizontal-sm direction text-align">
                         <li class="list-group-item card-background size-infos">Typ 1</li>
                         <li id ="${type1ID}" class="list-group-item card-background size-infos">${type1}</li>
                     </ul>
-                    <ul class="list-group list-group-horizontal-sm">
+                    <ul class="list-group list-group-horizontal-sm direction text-align">
                         <li class="list-group-item card-background size-infos">Typ 2</li>
                         <li id ="${type2ID}" class="list-group-item card-background size-infos">${type2}</li>
                     </ul>
@@ -87,6 +89,9 @@ function renderDialog(name, number, height, weight, picture, type1, type2, HP, H
             </div>
         </div>
     </div>
+            </div>
+        </div>
+    
 </div>
     `
 }
@@ -300,5 +305,133 @@ function typeColorDragon(i, type1, type2, type1ID, type2ID) {
 
     if (type2 == 'Dragon') {
         document.getElementById(`${type2ID}`).classList.add('dragon');
+    }
+}
+
+function dialogBackgroundColor(type1, name) {
+    if (type1 == 'Grass') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-grass');
+    }
+}
+
+function dialogBackgroundColor(type1, name) {
+    backgroundColorGrass(type1, name);
+    backgroundColorFire(type1, name);
+    backgroundColorWater(type1, name);
+    backgroundColorBug(type1, name);
+    backgroundColorNormal(type1, name);
+    backgroundColorPoison(type1, name);
+    backgroundColorFlying(type1, name);
+    backgroundColorElectric(type1, name);
+    backgroundColorGround(type1, name);
+    backgroundColorFairy(type1, name);
+    backgroundColorFighting(type1, name);
+    backgroundColorPsychic(type1, name);
+    backgroundColorRock(type1, name);
+    backgroundColorSteel(type1, name);
+    backgroundColorIce(type1, name);
+    backgroundColorGhost(type1, name);
+    backgroundColorDragon(type1, name);
+}
+
+function backgroundColorGrass(type1, name) {
+    if (type1 == 'Grass') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-grass');
+    }
+}
+
+function backgroundColorFire(type1, name) {
+    if (type1 == 'Fire') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-fire');
+    }
+}
+
+function backgroundColorWater(type1, name) {
+    if (type1 == 'Water') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-water');
+    }
+}
+
+function backgroundColorBug(type1, name) {
+    if (type1 == 'Bug') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-bug');
+    }
+}
+
+function backgroundColorNormal(type1, name) {
+    if (type1 == 'Normal') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-normal');
+    }
+}
+
+function backgroundColorPoison(type1, name) {
+    if (type1 == 'Poison') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-poison');
+    }
+}
+
+function backgroundColorFlying(type1, name) {
+    if (type1 == 'Flying') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-flying');
+    }
+}
+
+function backgroundColorElectric(type1, name) {
+    if (type1 == 'Electric') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-electric');
+    }
+}
+
+function backgroundColorGround(type1, name) {
+    if (type1 == 'Ground') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-ground');
+    }
+}
+
+function backgroundColorFairy(type1, name) {
+    if (type1 == 'Fairy') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-fairy');
+    }
+}
+
+function backgroundColorFighting(type1, name) {
+    if (type1 == 'Fighting') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-fighting');
+    }
+}
+
+function backgroundColorPsychic(type1, name) {
+    if (type1 == 'Psychic') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-psychic');
+    }
+}
+
+function backgroundColorRock(type1, name) {
+    if (type1 == 'Rock') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-rock');
+    }
+}
+
+function backgroundColorSteel(type1, name) {
+    if (type1 == 'Steel') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-steel');
+    }
+}
+
+function backgroundColorIce(type1, name) {
+    if (type1 == 'Ice') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-ice');
+    }
+}
+
+function backgroundColorGhost(type1, name) {
+    if (type1 == 'Ghost') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-ghost');
+    }
+}
+
+function backgroundColorDragon(type1, name) {
+    if (type1 == 'Dragon') {
+        document.getElementById('dialog'+`${name}`).classList.add('background-dragon');
     }
 }
