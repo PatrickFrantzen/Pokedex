@@ -183,7 +183,6 @@ body {
 
 .dialog {
     width: 60vw;
-    height: 88vh;
     background-color: white;
     border: unset;
     border-radius: 10px;
@@ -449,6 +448,18 @@ body {
 
 .background-dragon {
     background-image:linear-gradient(to bottom left, #b2d3f5, #17599c)
+    }
+
+    .canvas-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .canvas {
+        height: unset !important;
+        width: 66% !important;
+        display: flex;
     }
 
     @media screen and (max-width:992px) {

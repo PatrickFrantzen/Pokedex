@@ -59,33 +59,8 @@ function renderDialog(name, number, height, weight, picture, type1, type2, HP, H
                 </div>
             </div>
         </div>
-            <div class="card card-background " style="width: 100%;">
-                <div class="card-body card-background display-stats">
-                    <ul class="list-group list-group-horizontal-sm text-align">
-                        <li class="list-group-item card-background size-stats flex-start">${HP}</li>
-                        <li class="list-group-item card-background size-stats">${HPvalue}</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal-sm text-align">
-                        <li class="list-group-item card-background size-stats flex-start">${Att}</li>
-                        <li class="list-group-item card-background size-stats">${Attvalue}</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal-sm text-align">
-                        <li class="list-group-item card-background size-stats flex-start">${Def}</li>
-                        <li class="list-group-item card-background size-stats">${Defvalue}</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal-sm text-align">
-                        <li class="list-group-item card-background size-stats flex-start">${SpA}</li>
-                        <li class="list-group-item card-background size-stats">${SpAvalue}</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal-sm text-align">
-                        <li class="list-group-item card-background size-stats flex-start">${SpD}</li>
-                        <li class="list-group-item card-background size-stats">${SpDvalue}</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal-sm text-align">
-                        <li class="list-group-item card-background size-stats flex-start">${Speed}</li>
-                        <li class="list-group-item card-background size-stats">${Speedvalue}</li>
-                    </ul>
-                </div>     
+            <div class="card card-background canvas-container " style="width: 100%;">
+                <canvas id="myChart" class="canvas"></canvas>
             </div>
         </div>
     </div>
